@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,10 +13,10 @@
     <title>GeekShop - Каталог</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="/static/css/products.css" rel="stylesheet">
+    <link href="{% static 'css/products.css' %}" rel="stylesheet">
 
 </head>
 
@@ -73,15 +75,15 @@
                     </ol>
                     <div class="carousel-inner" role="listbox">
                         <div class="carousel-item active">
-                            <img class="d-block img-fluid" src="/static/vendor/img/slides/slide-1.jpg"
+                            <img class="d-block img-fluid" src="{% static 'vendor/img/slides/slide-1.jpg' %}"
                                 alt="First slide">
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block img-fluid" src="/static/vendor/img/slides/slide-2.jpg"
+                            <img class="d-block img-fluid" src="{% static 'vendor/img/slides/slide-2.jpg' %}"
                                 alt="Second slide">
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block img-fluid" src="/static/vendor/img/slides/slide-3.jpg"
+                            <img class="d-block img-fluid" src="{% static 'vendor/img/slides/slide-3.jpg' %}"
                                 alt="Third slide">
                         </div>
                     </div>
@@ -100,7 +102,8 @@
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
                             <a href="#">
-                                <img class="card-img-top" src="/static/vendor/img/products/Adidas-hoodie.png" alt="">
+                                <img class="card-img-top" src="{% static 'vendor/img/products/Adidas-hoodie.png' %}"
+                                     alt="">
                             </a>
                             <div class="card-body">
                                 <h4 class="card-title">
@@ -119,7 +122,7 @@
                         <div class="card h-100">
                             <a href="#">
                                 <img class="card-img-top"
-                                    src="/static/vendor/img/products/Blue-jacket-The-North-Face.png" alt="">
+                                    src="{% static 'vendor/img/products/Blue-jacket-The-North-Face.png' %}" alt="">
                             </a>
                             <div class="card-body">
                                 <h4 class="card-title">
@@ -140,7 +143,8 @@
                         <div class="card h-100">
                             <a href="#">
                                 <img class="card-img-top"
-                                    src="/static/vendor/img/products/Brown-sports-oversized-top-ASOS-DESIGN.png" alt="">
+                                    src="{% static 'vendor/img/products/Brown-sports-oversized-top-ASOS-DESIGN.png' %}"
+                                     alt="">
                             </a>
                             <div class="card-body">
                                 <h4 class="card-title">
@@ -159,7 +163,7 @@
                         <div class="card h-100">
                             <a href="#">
                                 <img class="card-img-top"
-                                    src="/static/vendor/img/products/Black-Nike-Heritage-backpack.png" alt="">
+                                    src="{% static 'vendor/img/products/Black-Nike-Heritage-backpack.png' %}" alt="">
                             </a>
                             <div class="card-body">
                                 <h4 class="card-title">
@@ -177,8 +181,8 @@
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
                             <a href="#">
-                                <img class="card-img-top" src="/static/vendor/img/products/Black-Dr-Martens-shoes.png"
-                                    alt="">
+                                <img class="card-img-top"
+                                     src="{% static 'vendor/img/products/Black-Dr-Martens-shoes.png' %}" alt="">
                             </a>
                             <div class="card-body">
                                 <h4 class="card-title">
@@ -197,7 +201,7 @@
                         <div class="card h-100">
                             <a href="#">
                                 <img class="card-img-top"
-                                    src="/static/vendor/img/products/Dark-blue-wide-leg-ASOs-DESIGN-trousers.png"
+                                    src="{% static 'vendor/img/products/Dark-blue-wide-leg-ASOs-DESIGN-trousers.png' %}"
                                     alt="">
                             </a>
                             <div class="card-body">
@@ -245,11 +249,11 @@
     </footer>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="/static/vendor/jquery/jquery.min.js"></script>
-    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
     <!-- FontAwesome script -->
-    <script src="/static/vendor/fontawesome/fontawesome-icons.js" crossorigin="anonymous"></script>
+    <script src="{% static 'vendor/fontawesome/fontawesome-icons.js' %}" crossorigin="anonymous"></script>
 
 </body>
 
