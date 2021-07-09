@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls, name='admin_log'),
     path('', index, name='index'),
     path('products/', include('productsapp.urls', namespace='products')),
+    path('users/', include('users.urls', namespace='users')),
 
 ]
 
