@@ -6,10 +6,17 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-7">
-                    {% if form.errors %}
-                        <div class="alert alert-warning alert-dismissible fade show" role="alert"
+                    {% if messages or form.errors %}
+                        <div class="alert {% if messages %} alert-success {% else %} alert-warning {% endif %}
+                         alert-dismissible fade show" role="alert"
                              style="margin-top: 50px;">
-                            {{ form.errors }}
+                            {% if messages %}
+                                {% for msg in messages %}
+                                    {{ msg }}
+                                {% endfor %}
+                            {% else %}
+                                {{ errors }}
+                            {% endif %}
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
