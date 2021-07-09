@@ -14,7 +14,7 @@
                 <h1 class="my-4">GeekShop</h1>
                 <div class="list-group">
                     {% for menu_item in menu_items %}
-                        <a href="#" class="list-group-item">{{ menu_item }}</a>
+                        <a href="#" class="list-group-item">{{ menu_item.name }}</a>
                     {% endfor %}
                 </div>
             </div>
@@ -54,14 +54,14 @@
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
                             <a href="#">
-                                <img class="card-img-top" src="{% static items.imgurls %}"
+                                <img class="card-img-top" src="{{ items.image.url }}"
                                      alt="">
                             </a>
                             <div class="card-body">
                                 <h4 class="card-title">
                                     <a href="#">{{ items.name }}</a>
                                 </h4>
-                                <h5>{{ items.price }}</h5>
+                                <h5>{{ items.price }} руб.</h5>
                                 <p class="card-text">{{ items.description}}</p>
                             </div>
                             <div class="card-footer text-center">

@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from productsapp.models import Product, ProductCategory
 import json
 import os
 
@@ -17,8 +18,7 @@ def index(request):
 def products(request):
     context = {
         'title': 'GeekShop - Каталог',
-        'menu_items': ('Новинки', 'Одежда', 'Обувь', 'Аксессуары', 'Подарки'),
-        'productList': json.load(
-            open(os.path.join(os.path.dirname(__file__), 'fixtures/productsList.json'), encoding='utf-8'))
+        'menu_items': ProductCategory.objects.values(),
+        'productList': Product.objects.all()
     }
     return render(request, 'products/products.html', context)
