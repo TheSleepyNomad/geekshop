@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponseRedirect
 from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 from django.contrib import auth, messages
 from django.urls import reverse
+from basketsapp.models import Basket
 
 
 # Create your views here.
@@ -32,7 +33,9 @@ def registration(request):
     else:
         form = UserRegistrationForm()
 
-    context = {'title': 'Geekshop - Регистрация', 'form': form, }
+    context = {'title': 'Geekshop - Регистрация',
+               'form': form,
+               }
     return render(request, 'users/register.html', context)
 
 
@@ -48,7 +51,6 @@ def profile(request):
             form.save()
             return HttpResponseRedirect(reverse('users:profile'))
     else:
-        pass
-    form = UserProfileForm(instance=request.user)
-    context = {'title': 'GeekShop - ЛК', 'form': form}
+        form = UserProfileForm(instance=request.user)
+    context = {'title': 'GeekShop - ЛК', 'form': form, 'baskets': Basket.objects.all(), }
     return render(request, 'users/profile.html', context)
