@@ -66,11 +66,13 @@
 {% block footer %} {% endblock %}
 
 <!-- Bootstrap core JavaScript -->
-<script src="{% static 'vendor/fontawesome/fontawesome-icons.js' %}"></script>
-<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script defer src="{% static 'vendor/fontawesome/fontawesome-icons.js' %}"></script>
+<script defer src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
 <!-- FontAwesome script -->
-<script src="{% static 'vendor/fontawesome/fontawesome-icons.js' %}" crossorigin="anonymous"></script>
+<script defer src="{% static 'vendor/fontawesome/fontawesome-icons.js' %}" crossorigin="anonymous"></script>
+
+<script defer src="{% static 'js/basket.js' %}"></script>
 
 </body>
 
