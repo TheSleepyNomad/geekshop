@@ -3,3 +3,5 @@ README.md
 __pycache__/
 media
 .env
+.vscode
+tmp/
