@@ -35,6 +35,7 @@ class UserRegistrationForm(UserCreationForm):
 
 class UserProfileForm(UserChangeForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4', 'readonly': True, }))
+    age = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4', 'readonly': True, }))
     email = forms.CharField(widget=forms.EmailInput(attrs={
         'class': 'form-control py-4', 'readonly': True, }))
     first_name = forms.CharField(widget=forms.TextInput(attrs={
@@ -45,4 +46,4 @@ class UserProfileForm(UserChangeForm):
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'image', 'username', 'email')
+        fields = ('first_name', 'last_name', 'image', 'username', 'email','age')
