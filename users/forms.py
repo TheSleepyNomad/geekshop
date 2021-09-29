@@ -16,8 +16,8 @@ class UserLoginForm(AuthenticationForm):
         fields = ("username", "password")
 
     def __init__(self, *args, **kwargs):
-        self.fields['username'].widget.attrs['placeholder'] = 'Введите имя пользователя'
-        self.fields['email'].widget.attrs['placeholder'] = 'Введите адрес эл.почты'
+        self.fields['username'].widget.attrs['placeholder'] = 'Введите имя'
+        self.fields['email'].widget.attrs['placeholder'] = 'Введите эл.почту'
 
         for fild_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'
@@ -32,8 +32,8 @@ class UserRegistrationForm(UserCreationForm):
     password2 = forms.CharField(widget=forms.PasswordInput())
 
     def __init__(self, *args, **kwargs):
-        self.fields['username'].widget.attrs['placeholder'] = 'Введите имя пользователя'
-        self.fields['email'].widget.attrs['placeholder'] = 'Введите адрес эл.почты'
+        self.fields['username'].widget.attrs['placeholder'] = 'Введите имя'
+        self.fields['email'].widget.attrs['placeholder'] = 'Введите эл.почту'
         self.fields['first_name'].widget.attrs['placeholder'] = 'Введите имя'
         self.fields['last_name'].widget.attrs['placeholder'] = 'Введите фамилию'
         self.fields['password1'].widget.attrs['placeholder'] = 'Введите пароль'
