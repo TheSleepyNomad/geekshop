@@ -16,3 +16,8 @@ class User(AbstractUser):
     # activation_key_expires = models.DateTimeField(default=(now()+timedelta(hours=48)))
     activation_key_expires = models.DateTimeField(
         auto_now_add=True, blank=True)
+
+    def is_activation_key_expired(self):
+        if now() < self.activation_key_expires + timedelta(hours=48):
+            return False
+        return True
