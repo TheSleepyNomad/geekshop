@@ -34,7 +34,8 @@ def registration(request):
         if form.is_valid():
             x = form.save()
             if send_veify_link(x):
-                messages.success(request, 'Регистрация выполнена')
+                messages.success(
+                    request, 'Регистрация выполнена! На почту отправлена ссылка для подтверждения')
                 return HttpResponseRedirect(reverse('users:login'))
     else:
         form = UserRegistrationForm()
@@ -83,4 +84,4 @@ def verify(request, email, activation_key):
         auth.login(request, user)
         return render(request, 'users/verification.html')
     else:
-        pass
+        return render(request, 'users/verification.html')
