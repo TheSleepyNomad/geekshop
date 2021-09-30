@@ -7,6 +7,7 @@ from django.urls import reverse
 from basketsapp.models import Basket
 from geekshop.settings import DOMAIN_NAME, EMAIL_HOST_USER
 from django.core.mail import send_mail
+from .models import User
 
 
 # Create your views here.
@@ -73,4 +74,13 @@ def send_veify_link(user):
 
 
 def verify(request, email, activation_key):
-    pass
+    user = User.objects.get(email=email)
+    if user and user.activation_key == activation_key and not user.is_activation_key_expired():
+        user.activation_key = ''
+        user.is_activation_key_expired = None
+        user.is_active = True
+        user.save()
+        auth.login(request, user)
+        return render(request, 'users/verification.html')
+    else:
+        pass
