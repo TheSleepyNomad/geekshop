@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'users',
     'basketsapp',
     'admins',
-    'social_django'
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -140,7 +140,7 @@ LOGIN_URL = '/users/login/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.User'
-AUTHENTICATION_BACKEND = (
+AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'social_core.backends.vk.VKOAuth2',
 )
@@ -154,6 +154,6 @@ DOMAIN_NAME = 'http://localhost:8000'
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = 'tmp\emails'
 
-SOCIAL_AUTH_VK_OAUTH2_KEY = os.getenv('SOCIAL_AUTH_VK_OAUTH2_KEY')
-SOCIAL_AUTH_VK_OAUTH2_KEY_SECRET = os.getenv('SOCIAL_AUTH_VK_OAUTH2_KEY_SECRET')
-SOCIAL_AUTH_VK_OAUTH2_KEY_VERSION = '5.131'
+SOCIAL_AUTH_VK_OAUTH2_KEY = '7966627'
+SOCIAL_AUTH_VK_OAUTH2_SECRET = '7XqTvXFqin6CEGFyYItA'
+SOCIAL_AUTH_VK_OAUTH2_API_VERSION = '5.81'
