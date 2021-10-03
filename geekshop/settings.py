@@ -57,6 +57,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+
 ]
 
 ROOT_URLCONF = 'geekshop.urls'
@@ -154,6 +156,6 @@ DOMAIN_NAME = 'http://localhost:8000'
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = 'tmp\emails'
 
-SOCIAL_AUTH_VK_OAUTH2_KEY = os.getenv('SOCIAL_AUTH_VK_OAUTH2_KEY')
-SOCIAL_AUTH_VK_OAUTH2_SECRET = os.getenv('SOCIAL_AUTH_VK_OAUTH2_SECRET')
-SOCIAL_AUTH_VK_OAUTH2_API_VERSION = os.getenv('SOCIAL_AUTH_VK_OAUTH2_API_VERSION')
+SOCIAL_AUTH_VK_OAUTH2_KEY = '7966627'
+SOCIAL_AUTH_VK_OAUTH2_SECRET = '7XqTvXFqin6CEGFyYItA'
+SOCIAL_AUTH_VK_OAUTH2_API_VERSION = '5.81'

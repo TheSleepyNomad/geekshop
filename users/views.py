@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.urls.base import reverse_lazy
-from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
+from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm, UserProfileEditForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth, messages
 from django.urls import reverse
@@ -56,13 +56,20 @@ def profile(request):
     if request.method == 'POST':
         form = UserProfileForm(instance=request.user,
                                data=request.POST, files=request.FILES)
-        if form.is_valid():
+        profile = UserProfileEditForm(
+            data=request.POST, instance=request.user.userprofile)
+        if form.is_valid() and profile.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('users:profile'))
     else:
         form = UserProfileForm(instance=request.user)
-    context = {'title': 'GeekShop - ЛК', 'form': form,
-               'baskets': Basket.objects.filter(user=request.user), }
+        profile = UserProfileEditForm(
+            data=request.POST, instance=request.user.userprofile)
+    context = {'title': 'GeekShop - ЛК',
+               'form': form,
+               'profile_form': profile,
+               'baskets': Basket.objects.filter(user=request.user),
+               }
     return render(request, 'users/profile.html', context)
 
 

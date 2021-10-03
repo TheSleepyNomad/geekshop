@@ -3,7 +3,8 @@ from django.contrib.auth.forms import (
     UserCreationForm,
     UserChangeForm,
 )
-from users.models import User
+
+from users.models import User, UserProfile
 from django import forms
 import hashlib
 from random import random
@@ -135,3 +136,18 @@ class UserProfileForm(UserChangeForm):
         model = User
         fields = ("first_name", "last_name", "image",
                   "username", "email", "age")
+
+
+class UserProfileEditForm(forms.ModelForm):
+
+    class Meta:
+        model = UserProfile
+        fields = ('tagline', 'gender', 'about_me')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            if field_name != 'gender':
+                field.widget.attrs['class'] = 'form-control py-4'
+            else:
+                field.widget.attrs['class'] = 'form-control py-4'
