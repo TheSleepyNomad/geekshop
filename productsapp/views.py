@@ -15,7 +15,8 @@ def index(request):
 
 
 def products(request, category_id=None, page=1):
-    context = {'title': 'GeekShop - Каталог', 'menu_items': ProductCategory.objects.values(), }
+    context = {'title': 'GeekShop - Каталог',
+               'menu_items': ProductCategory.objects.values(), }
     if category_id:
         products = Product.objects.filter(category_id=category_id)
     else:
