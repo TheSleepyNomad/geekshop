@@ -8,7 +8,7 @@ class OrderList(ListView):
     pass
 
 
-class OrderItemsCreate(CreateView):
+class OrderCreate(CreateView):
     pass
 
 
@@ -21,4 +21,8 @@ class OrderDelete(DeleteView):
 
 
 class OrderDetail(DetailView):
+    pass
+
+
+def order_forming_complete(request, pk):
     pass

@@ -1,10 +1,15 @@
 from django.urls import path
+from .views import *
 
 
 app_name = 'ordersapp'
 
 urlpatterns = [
-    # path('add/<int:product_id>/', basket_add, name='basket_add'),
-    # path('remove/<int:id>/', basket_del, name='basket_del'),
-    # path('edit/<int:id>/<int:quantity>/', basket_edit, name='basket_edit'),
+    path('', OrderList.as_view(), name='list'),
+    path('create/', OrderCreate.as_view(), name='create'),
+    path('read/<int:pk>/', OrderDetail.as_view(), name='read'),
+    path('upadte/<int:pk>/', OrderUpdate.as_view(), name='update'),
+    path('delete/<int:pk>/', OrderDelete.as_view(), name='delete'),
+    path('forming_complete/<int:pk>/',
+         order_forming_complete, name='forming_complete'),
 ]
