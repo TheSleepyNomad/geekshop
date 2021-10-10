@@ -56,7 +56,7 @@ class OrderItem(models.Model):
         Product, verbose_name='product', on_delete=models.CASCADE)
     qty = models.PositiveBigIntegerField(verbose_name='quantity', default=0)
 
-    def get_product_cost(self):
+    def get_total_qty(self):
         return self.products.price * self.qty
 
     def __str__(self):

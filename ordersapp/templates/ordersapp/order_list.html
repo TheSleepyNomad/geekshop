@@ -41,7 +41,7 @@
             </td>
             <td>
                 {% if item.status == 'FM' %}
-                <a href="">
+                <a href="{% url 'ordersapp:delete' item.pk %}">
                     удалить
                 </a>
                 {% endif %}
