@@ -48,6 +48,14 @@ class Order(models.Model):
     def __str__(self):
         return f'Текущий заказ {self.pk}'
 
+    def delete(self, using=None, keep_parents=False):
+        for item in self.orderitems.select_related():
+            item.products.quantity += item.quantity
+            item.products.save()
+
+        self.is_active = False
+        self.save()
+
 
 class OrderItem(models.Model):
     order = models.ForeignKey(
