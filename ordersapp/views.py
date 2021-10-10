@@ -125,3 +125,7 @@ def order_forming_complete(request, pk):
     order.status = order.SEND_TO_PROCEED
     order.save()
     return HttpResponseRedirect(reverse('ordersapp:list'))
+
+
+def payment_result(request):
+    pass
