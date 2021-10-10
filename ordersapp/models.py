@@ -52,7 +52,6 @@ class Order(models.Model):
         for item in self.orderitems.select_related():
             item.products.quantity += item.quantity
             item.products.save()
-
         self.is_active = False
         self.save()
 
