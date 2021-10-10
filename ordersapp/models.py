@@ -61,10 +61,11 @@ class OrderItem(models.Model):
         Order, related_name='orderitems', on_delete=models.CASCADE)
     products = models.ForeignKey(
         Product, verbose_name='product', on_delete=models.CASCADE)
-    qty = models.PositiveBigIntegerField(verbose_name='quantity', default=0)
+    quantity = models.PositiveBigIntegerField(
+        verbose_name='quantity', default=0)
 
     def get_total_qty(self):
-        return self.products.price * self.qty
+        return self.products.price * self.quantity
 
     def __str__(self):
         return f'Текущий заказ {self.pk}'

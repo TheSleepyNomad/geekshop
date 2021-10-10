@@ -10,7 +10,7 @@
         <table class="table">
             {{ orderitems.management_form }}
             {% for form in orderitems.forms %}
-                {% if forloop.first %}
+            {% if forloop.first %}
             <thead>
                 <tr>
                     {% for field in form.visible_fields %}
@@ -30,7 +30,17 @@
                     {% endfor %}
                     {% endif %}
                     {{ field.errors.as_ul }}
+
+                    {% if field.name == 'price' %}
+                    {% if not field.value %}
+                    {% else %}
+                    <span class="orderitems-{{ forloop.parentloop.counter0 }}-price">
+                        {{ field.value|default:0 }} руб
+                    </span>
+                    {% endif %}
+                    {% else %}
                     {{ field }}
+                    {% endif %}
                 </td>
                 {% endfor %}
             </tr>

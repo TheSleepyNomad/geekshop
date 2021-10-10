@@ -4,7 +4,7 @@ from django.db.models import fields
 from django.db import transaction
 from django.forms.models import inlineformset_factory
 from django.shortcuts import get_object_or_404, render
-from django.urls.base import reverse_lazy,reverse
+from django.urls.base import reverse_lazy, reverse
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
 
@@ -44,7 +44,7 @@ class OrderCreate(CreateView):
                 for num, form in enumerate(formset.forms):
                     form.initial['products'] = basket_items[num].product
                     form.initial['quantity'] = basket_items[num].quantity
-
+                    form.initial['price'] = basket_items[num].product.price
                 basket_items.delete()
 
             else:
@@ -84,7 +84,9 @@ class OrderUpdate(UpdateView):
             formset = OrderFormSet(self.request.POST, instance=self.object)
         else:
             formset = OrderFormSet(instance=self.object)
-
+            for form in formset:
+                if form.instance.pk:
+                    form.initial['price'] = form.instance.products.price
         context['orderitems'] = formset
         return context
 
@@ -118,9 +120,8 @@ class OrderDetail(DetailView):
         return context
 
 
-
 def order_forming_complete(request, pk):
-    order = get_object_or_404(Order,pk=pk)
+    order = get_object_or_404(Order, pk=pk)
     order.status = order.SEND_TO_PROCEED
     order.save()
     return HttpResponseRedirect(reverse('ordersapp:list'))
