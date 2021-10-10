@@ -1,5 +1,6 @@
-{% extends 'productsapp/base.html' %}
+{% extends 'products/base.html' %}
 {% load static %}
+
 {% block content %}
 <div class="h2 text-center head">
     Ваши заказы,
@@ -27,20 +28,20 @@
             <td>{{ item.updated|date:"Y-m-d H:i:s" }}</td>
             <td>{{ item.get_status_display }}</td>
             <td>
-                <a href="{% url 'ordersapp:order_read' item.pk %}">
+                <a href="">
                     посмотреть
                 </a>
             </td>
             <td>
                 {% if item.status == 'FM' %}
-                <a href="{% url 'ordersapp:order_update' item.pk %}">
+                <a href="">
                     редактировать
                 </a>
                 {% endif %}
             </td>
             <td>
                 {% if item.status == 'FM' %}
-                <a href="{% url 'ordersapp:order_delete' item.pk %}">
+                <a href="">
                     удалить
                 </a>
                 {% endif %}
@@ -51,12 +52,12 @@
     </tbody>
 </table>
 <button class="btn btn-default btn-round">
-    <a href="{% url 'main' %}">
+    <a href="">
         на главную
     </a>
 </button>
 <button class="btn btn-default btn-round">
-    <a href="{% url 'ordersapp:order_create' %}">
+    <a href="">
         новый
     </a>
 </button>
