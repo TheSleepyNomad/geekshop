@@ -15,13 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from productsapp.views import index, products
+from productsapp.views import startPageView
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin_log'),
-    path('', index, name='index'),
+    path('', startPageView.as_view(), name='index'),
     path('products/', include('productsapp.urls', namespace='products')),
     path('users/', include('users.urls', namespace='users')),
     path('baskets/', include('basketsapp.urls', namespace='baskets')),
