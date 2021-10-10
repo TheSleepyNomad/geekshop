@@ -70,7 +70,37 @@ class OrderCreate(CreateView):
 
 
 class OrderUpdate(UpdateView):
-    pass
+    model = Order
+    fields = []
+    success_url = reverse_lazy('ordersapp:list')
+
+    def get_context_data(self, **kwargs):
+        context = super(OrderUpdate, self).get_context_data(**kwargs)
+        context['title'] = 'Geekshop : Создание заказа'
+        OrderFormSet = inlineformset_factory(
+            Order, OrderItem, form=OrderItemsForm, extra=1)
+        if self.request.POST:
+            formset = OrderFormSet(self.request.POST, instance=self.object)
+        else:
+            formset = OrderFormSet(instance=self.object)
+
+        context['orderitems'] = formset
+        return context
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        orderitems = context['orderitems']
+
+        with transaction.atomic():
+            self.object = form.save()
+            if orderitems.is_valid():
+                orderitems.instance = self.object
+                orderitems.save()
+
+            if self.object.get_total_cost() == 0:
+                self.object.delete()
+
+        return super().form_valid(form)
 
 
 class OrderDelete(DeleteView):
@@ -79,7 +109,12 @@ class OrderDelete(DeleteView):
 
 
 class OrderDetail(DetailView):
-    pass
+    model = Order
+
+    def get_context_data(self, **kwargs):
+        context = super(OrderDetail, self).get_context_data(**kwargs)
+        context['title'] = 'заказ/просмотр'
+        return context
 
 
 def order_forming_complete(request, pk):

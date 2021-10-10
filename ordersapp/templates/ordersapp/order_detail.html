@@ -1,0 +1,31 @@
+{% extends "products/base.html" %}
+{% load static %}
+{% comment %} {% load my_tags %} {% endcomment %}
+
+{% block content %}
+   {% include 'ordersapp/includes/inc_order_summary.html' %}
+   <div class="basket_list">
+       {% for item in object.orderitems.select_related %}
+           <div class="basket_record">
+               <img src="{{ item.products.image.url }}" style="height:150px"
+                    alt="{{ item.products.short_desc }}">
+               <span class="category_name">
+                   {{ item.product.category.name }}
+               </span>
+               <span class="product_name">{{ item.products.name }}</span>
+               <span class="product_price">
+                   {{ item.products.price }}&nbspруб
+               </span>
+               <span class="product_quantitiy">
+                   x {{ item.qty }} шт.
+               </span>
+               <span class="product_cost">
+                    = {{ item.get_total_qty }}&nbspруб
+               </span>
+           </div>
+       {% endfor %}
+   </div>
+   {% include 'ordersapp/includes/inc_order_actions.html' %}
+
+{% endblock %}
+
