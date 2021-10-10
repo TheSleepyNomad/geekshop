@@ -2,10 +2,65 @@ window.onload = function () {
     let _quantity, _price, orderitem_num, delta_quantity, orderitem_quantity, delta_coast;
     let quantity_arr = [];
     let price_arr = [];
-
     let total_forms = parseInt($('input[name=orderitems-TOTAL_FORMS]').val());
-    console.log(total_forms);
+    let order_total_quantity = parseInt($('.order_total_quantity').text()) || 'write about total quantity not find';
+    let order_total_price = parseInt($('.order_total_cost').text().replace(',', '.')) || 'write about total cost not find';
 
-    let order_total_quantity = parseInt($('.order_total_quantity').text()) || 0;
-    console.log(order_total_quantity);
+    for (let i = 0; i < total_forms; i++) {
+        _quantity = parseInt($('input[name=orderitems-' + i + '-quantity]').val());
+        _price = parseInt($('.orderitems-' + i + '-price').text().replace(',', '.'));
+        quantity_arr[i] = _quantity;
+        if (_price) {
+            price_arr[i] = _price;
+        } else {
+            price_arr[i] = 0;
+        }
+    }
+
+    $('.order_form').on('click', 'input[type=number]', function () {
+        let target = event.target;
+        console.log(target)
+        orderitem_num = parseInt(target.name.replace('orderitems-', '').replace('-DELETE', ''));
+        if (price_arr[orderitem_num]) {
+            orderitem_quantity = parseInt(target.value);
+            delta_quantity = orderitem_quantity - quantity_arr[orderitem_num];
+            quantity_arr[orderitem_num] = orderitem_quantity;
+
+            orderSummeryUpdate(price_arr[orderitem_num], delta_quantity);
+        }
+    })
+    $('.order_form').on('click', 'input[type=checkbox]', function () {
+        let target = event.target;
+        orderitem_num = parseInt(target.name.replace('orderitems-', '').replace('-quantity', ''));
+        if (target.checked) {
+            delta_quantity = -quantity_arr[orderitem_num];
+        } else {
+            delta_quantity = quantity_arr[orderitem_num];
+        }
+        orderSummeryUpdate(price_arr[orderitem_num], delta_quantity);
+    })
+
+    function orderSummeryUpdate(orderitem_price, delta_quantity) {
+        delta_coast = orderitem_price * delta_quantity;
+        order_total_price = Number((order_total_price + delta_coast).toFixed(2));
+        order_total_quantity += delta_quantity;
+
+        $('.order_total_quantity').html(order_total_quantity.toString());
+        $('.order_total_cost').html(order_total_price.toString() + ',00');
+    }
+
+    $('.formset_row').formset({
+        addText: 'Добавть продукт',
+        deleteText: 'Удалить',
+        prefix: 'orderitems',
+        removed: deleteOrderItem,
+
+    });
+
+    function deleteOrderItem(row) {
+        let target_name = row[0].querySelector('input[type="number"]').name;
+        orderitem_num = parseInt(target_name.replace('orderitems-', '').replace('-quantity', ''));
+        delta_quantity = -quantity_arr[orderitem_num];
+        orderSummeryUpdate(price_arr[orderitem_num], delta_quantity)
+    }
 }

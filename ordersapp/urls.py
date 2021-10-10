@@ -12,4 +12,6 @@ urlpatterns = [
     path('delete/<int:pk>/', OrderDelete.as_view(), name='delete'),
     path('forming_complete/<int:pk>/',
          order_forming_complete, name='forming_complete'),
+
+    path('payment/result/',payment_result, name='payment_result'),
 ]
