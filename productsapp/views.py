@@ -32,10 +32,13 @@ class productsPageView(ListView):
     template_name = 'products/products.html'
     context_object_name = 'products'
     extra_context = {'title': 'GeekShop - Каталог'}
+    paginate_by = 3
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['menu_items'] = ProductCategory.objects.values()
+        context['num_of_page'] = [x for x in range(1,
+                                                   context['paginator'].num_pages+1)]
         return context
 
     def get_queryset(self, *args, **kwargs):
