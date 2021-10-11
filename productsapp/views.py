@@ -1,8 +1,10 @@
 from django.http import request
 from django.shortcuts import render
+from django.views.generic.detail import DetailView
 from productsapp.models import Product, ProductCategory
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import TemplateView, ListView
+from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
@@ -35,6 +37,14 @@ class productsPageView(ListView):
         context = super().get_context_data(**kwargs)
         context['menu_items'] = ProductCategory.objects.values()
         return context
+
+    def get_queryset(self, *args, **kwargs):
+        if 'category_id' in self.kwargs:
+            category_id = get_object_or_404(ProductCategory,
+                                            pk=self.kwargs['category_id'])
+            return Product.objects.filter(category=category_id.pk)
+        else:
+            return Product.objects.all()
 
 
 # def products(request, category_id=None, page=1):
