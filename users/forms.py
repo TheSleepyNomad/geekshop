@@ -78,8 +78,8 @@ class UserRegistrationForm(UserCreationForm):
         fields = ('username', 'email', 'first_name',
                   'last_name', 'password1', 'password2')
 
-    def email_validation(self, *args, **kwargs):
-        
+    def email_validation(self, email, *args, **kwargs):
+        return True if validate_email(email, verify=True) else False
 
     def save(self, commit=True):
         user = super(UserRegistrationForm, self).save()

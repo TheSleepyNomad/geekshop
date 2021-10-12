@@ -31,18 +31,25 @@ def login(request):
 def registration(request):
     if request.method == 'POST':
         form = UserRegistrationForm(data=request.POST)
-        if form.is_valid():
+        if form.is_valid() and form.email_validation(request.POST['email']):
             x = form.save()
             if send_veify_link(x):
                 messages.success(
                     request, 'Регистрация выполнена! На почту отправлена ссылка для подтверждения')
                 return HttpResponseRedirect(reverse('users:login'))
+        else:
+            messages.error(request,
+                           "Почта не прошла проверку доменного имени или такой почты не существует")
+            form = UserRegistrationForm()
+            context = {'title': 'Geekshop - Регистрация',
+                       'form': form,
+                       }
+            return render(request, 'users/register.html', context)
     else:
         form = UserRegistrationForm()
-
-    context = {'title': 'Geekshop - Регистрация',
-               'form': form,
-               }
+        context = {'title': 'Geekshop - Регистрация',
+                   'form': form,
+                   }
     return render(request, 'users/register.html', context)
 
 
@@ -88,7 +95,8 @@ def verify(request, email, activation_key):
         user.is_activation_key_expired = None
         user.is_active = True
         user.save()
-        auth.login(request, user,
+        auth.login(request,
+                   user,
                    backend='django.contrib.auth.backends.ModelBackend')
         return render(request, 'users/verification.html')
     else:
