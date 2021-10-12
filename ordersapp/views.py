@@ -129,20 +129,15 @@ def order_forming_complete(request, pk):
 
 def payment_result(request):
     status = request.GET.get('ik_inv_st')
-    # !Refactoring! on next weekends
+    order_pk = request.GET.get('ik_pm_no')
+    order_item = Order.objects.get(pk=order_pk)
     if status == 'success':
-        order_pk = request.GET.get('ik_pm_no')
-        order_item = Order.objects.get(pk=order_pk)
         order_item.status = Order.PAID
         order_item.save()
     if status == 'waitAccept':
-        order_pk = request.GET.get('ik_pm_no')
-        order_item = Order.objects.get(pk=order_pk)
         order_item.status = Order.PROCEED
         order_item.save()
     if status == 'canceled':
-        order_pk = request.GET.get('ik_pm_no')
-        order_item = Order.objects.get(pk=order_pk)
         order_item.status = Order.CANCEL
         order_item.save()
     return HttpResponseRedirect(reverse('ordersapp:list'))
