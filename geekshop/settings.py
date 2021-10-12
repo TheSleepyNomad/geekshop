@@ -82,6 +82,8 @@ TEMPLATES = [
                 # Add by me
                 'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
+                # write by me
+                'productsapp.context_processors.basket'
             ],
         },
     },

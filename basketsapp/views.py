@@ -29,6 +29,7 @@ def basket_del(request, id):
     basket.delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+
 @login_required
 def basket_edit(request, id, quantity):
     if request.is_ajax():
@@ -38,7 +39,7 @@ def basket_edit(request, id, quantity):
             basket.save()
         else:
             basket.delete()
-        baskets = Basket.objects.filter(user=request.user)
-        context = {'baskets': baskets}
-        result = render_to_string('baskets/basket.html', context)
+        # baskets = Basket.objects.filter(user=request.user)
+        # context = {'baskets': baskets}
+        result = render_to_string('baskets/basket.html', request=request)
         return JsonResponse({'result': result})
