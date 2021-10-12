@@ -8,6 +8,7 @@ from users.models import User, UserProfile
 from django import forms
 import hashlib
 from random import random
+from validate_email import validate_email
 
 
 class UserLoginForm(AuthenticationForm):
@@ -76,6 +77,9 @@ class UserRegistrationForm(UserCreationForm):
         model = User
         fields = ('username', 'email', 'first_name',
                   'last_name', 'password1', 'password2')
+
+    def email_validation(self, *args, **kwargs):
+        
 
     def save(self, commit=True):
         user = super(UserRegistrationForm, self).save()
