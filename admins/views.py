@@ -64,3 +64,9 @@ class UserDeleteView(DeleteView):
     @method_decorator(user_passes_test(lambda u: u.is_staff))
     def dispatch(self, request, *args, **kwargs):
         return super(UserDeleteView, self).dispatch(request, *args, **kwargs)
+
+class CategorysListView(ListView):
+    pass
+
+class ProductsListView(ListView):
+    pass
