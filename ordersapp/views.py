@@ -9,8 +9,9 @@ from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
 
 from ordersapp.forms import OrderItemsForm
-
+from productsapp.models import Product
 from .models import Order, OrderItem
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -141,3 +142,10 @@ def payment_result(request):
         order_item.status = Order.CANCEL
         order_item.save()
     return HttpResponseRedirect(reverse('ordersapp:list'))
+
+
+def get_product_price(request, pk):
+    if request.is_ajax():
+        product = Product.objects.filter(pk=pk)
+        if product:
+            return JsonResponse({'price'})
