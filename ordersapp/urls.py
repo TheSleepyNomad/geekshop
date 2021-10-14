@@ -14,5 +14,4 @@ urlpatterns = [
          order_forming_complete, name='forming_complete'),
 
     path('payment/result/', payment_result, name='payment_result'),
-    path(('product/<int:pk>/price/', get_product_price, name='product_price'))
 ]

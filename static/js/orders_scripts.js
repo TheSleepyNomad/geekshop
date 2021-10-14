@@ -63,4 +63,5 @@ window.onload = function () {
         delta_quantity = -quantity_arr[orderitem_num];
         orderSummeryUpdate(price_arr[orderitem_num], delta_quantity)
     }
+
 }

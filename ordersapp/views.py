@@ -144,8 +144,3 @@ def payment_result(request):
     return HttpResponseRedirect(reverse('ordersapp:list'))
 
 
-def get_product_price(request, pk):
-    if request.is_ajax():
-        product = Product.objects.filter(pk=pk)
-        if product:
-            return JsonResponse({'price'})
