@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.utils.decorators import method_decorator
+from productsapp.models import Product, ProductCategory
 
 
 # Create your views here.
@@ -19,7 +20,8 @@ class UserListView(ListView):
     template_name = 'admins/admin-users-read.html'  # Ренер выбранного шаблона
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        contex = super(UserListView, self).get_context_data(object_list=None, **kwargs)
+        contex = super(UserListView, self).get_context_data(
+            object_list=None, **kwargs)
         contex['title'] = 'Админ-панель - Пользователи'
         return contex
 
@@ -65,8 +67,12 @@ class UserDeleteView(DeleteView):
     def dispatch(self, request, *args, **kwargs):
         return super(UserDeleteView, self).dispatch(request, *args, **kwargs)
 
+
 class CategorysListView(ListView):
-    pass
+    model = ProductCategory
+    template_name = 'admins/admin-category-read.html'
+    context_object_name = 'category'
+
 
 class ProductsListView(ListView):
     pass
