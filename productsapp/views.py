@@ -45,9 +45,9 @@ class productsPageView(ListView):
         if 'category_id' in self.kwargs:
             category_id = get_object_or_404(ProductCategory,
                                             pk=self.kwargs['category_id'])
-            return Product.objects.filter(category=category_id.pk)
+            return Product.objects.filter(category=category_id.pk).select_related()
         else:
-            return Product.objects.all()
+            return Product.objects.all().select_related()
 
 
 # def products(request, category_id=None, page=1):
