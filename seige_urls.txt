@@ -1,0 +1,5 @@
+http://194.67.87.119/
+http://194.67.87.119/products/
+http://194.67.87.119/products/1/
+http://194.67.87.119/products/4/
+http://194.67.87.119/admin/login/?next=/admin
