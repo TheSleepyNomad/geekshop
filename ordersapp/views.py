@@ -84,7 +84,8 @@ class OrderUpdate(UpdateView):
         if self.request.POST:
             formset = OrderFormSet(self.request.POST, instance=self.object)
         else:
-            formset = OrderFormSet(instance=self.object)
+            queryset = self.object.orderitems.select_related()
+            formset = OrderFormSet(instance=self.object, queryset=queryset)
             for form in formset:
                 if form.instance.pk:
                     form.initial['price'] = form.instance.products.price
@@ -142,5 +143,3 @@ def payment_result(request):
         order_item.status = Order.CANCEL
         order_item.save()
     return HttpResponseRedirect(reverse('ordersapp:list'))
-
-
